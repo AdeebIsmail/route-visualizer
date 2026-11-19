@@ -176,10 +176,7 @@ const downloadImage = (
 
   if (!canvas) return;
 
-  const originalCanvas = canvas;
-  if (!originalCanvas) return;
-
-  const scale = 4;
+  const scale = 2;
 
   const exportCanvas = document.createElement("canvas");
 
@@ -187,8 +184,8 @@ const downloadImage = (
     current: exportCanvas,
   };
 
-  exportCanvas.style.width = `${originalCanvas.clientWidth}px`;
-  exportCanvas.style.height = `${originalCanvas.clientHeight}px`;
+  exportCanvas.style.width = `${canvas.clientWidth}px`;
+  exportCanvas.style.height = `${canvas.clientHeight}px`;
 
   Object.assign(exportCanvas.style, {
     position: "absolute",
@@ -199,12 +196,27 @@ const downloadImage = (
 
   renderCanvas(exportCanvasRef, map, mapBounds, mapData, scale);
 
-  const link = document.createElement("a");
-  link.download = "map.png";
-  link.href = exportCanvas.toDataURL("image/png");
-  link.click();
+  exportCanvas.toBlob((blob) => {
+    exportCanvas.remove();
 
-  exportCanvas.remove();
+    if (!blob) {
+      console.error("Failed to generate map image.");
+      return;
+    }
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "map.png";
+
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+
+    // Delay revoking the URL so the browser has time to process it.
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }, "image/png");
 };
 
 export default function Viewer({ onDownloadReady, ...map }: ViewerProps) {

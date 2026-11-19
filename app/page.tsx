@@ -153,7 +153,8 @@ export default function Home() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setSubmitted(true);
+
+    if (fileName) setSubmitted(true);
   }
 
   return (
@@ -296,19 +297,12 @@ export default function Home() {
           <button
             type="submit"
             className="flex w-full items-center justify-center gap-2 rounded-xl border border-gray-700 bg-gray-900 px-5 py-3.5 text-sm font-bold text-white transition hover:border-gray-500 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#e2764c] focus:ring-offset-2 focus:ring-offset-gray-950"
+            disabled={!fileName}
           >
             Load Map
-            <span aria-hidden="true">&#8680;</span>
+            <span className="hidden sm:inline">➡</span>
+            <span className="sm:hidden">⬇</span>
           </button>
-
-          {submitted && (
-            <p
-              role="status"
-              className="text-center text-sm font-medium text-[#e2764c]"
-            >
-              Your GPX route is loading!
-            </p>
-          )}
         </form>
         <button
           onClick={downloadMap ?? undefined}
@@ -316,8 +310,17 @@ export default function Home() {
           className="flex mt-4 w-full items-center justify-center gap-2 rounded-xl border border-gray-700 bg-gray-900 px-5 py-3.5 text-sm font-bold text-white transition hover:border-gray-500 hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-[#e2764c] focus:ring-offset-2 focus:ring-offset-gray-950"
         >
           Download Map
-          <span aria-hidden="true">&#8681;</span>
+          <span aria-hidden="true">⬇</span>
         </button>
+
+        {submitted && (
+          <p
+            role="status"
+            className="text-center text-sm font-medium text-[#e2764c] mt-3"
+          >
+            Your GPX route is loading!
+          </p>
+        )}
       </section>
 
       <section className="relative h-[70vh] min-h-[440px] flex-1 overflow-hidden bg-gray-950 lg:h-screen lg:min-h-0">
