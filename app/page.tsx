@@ -134,6 +134,9 @@ export default function Home() {
     setSubmitted(false);
     setFileError("");
 
+    setZoom(1);
+    setLatitude(0);
+    setLongitude(0);
     if (!file) {
       setRouteData(emptyRoute);
       return;
