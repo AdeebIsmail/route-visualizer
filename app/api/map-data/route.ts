@@ -50,7 +50,6 @@ export async function POST(request: Request) {
     `;
 
     const apiKey = process.env.NEXTGIS_API_KEY;
-    console.log("request");
     const response = await axios.post(
       "https://overpass.nextgis.com/" + apiKey + "/api/interpreter",
       `data=${encodeURIComponent(query)}`,
