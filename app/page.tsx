@@ -2,6 +2,8 @@
 
 import { ChangeEvent, FormEvent, useState, useCallback } from "react";
 import Viewer from "@/components/viewer";
+import { siGithub } from "simple-icons/icons";
+import { Globe } from "lucide-react";
 //
 type Coordinate = [number, number];
 
@@ -162,7 +164,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gray-950 text-[#edf3ee] lg:flex">
-      <section className="w-full max-w-md border-r border-gray-800 bg-gray-950 px-6 py-4 sm:px-10 lg:min-h-screen lg:px-14 lg:py-6">
+      <section className="flex w-full max-w-md flex-col border-r border-gray-800 bg-gray-950 px-6 py-4 sm:px-10 lg:min-h-screen lg:px-14 lg:py-6">
         <div className="mb-8 max-w-sm">
           <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#e2764c]">
             Route Visualizer
@@ -315,7 +317,6 @@ export default function Home() {
           Download Map
           <span aria-hidden="true">⬇</span>
         </button>
-
         {submitted && (
           <p
             role="status"
@@ -324,8 +325,32 @@ export default function Home() {
             Your GPX route is loading!
           </p>
         )}
-      </section>
+        <section className="sticky bottom-0 mt-auto border-t border-gray-700 bg-gray-950 p-4">
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/AdeebIsmail"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
+                <path d={siGithub.path} />
+              </svg>
+            </a>
 
+            <a
+              href="https://adeebismail.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Personal Website"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <Globe size={20} />
+            </a>
+          </div>
+        </section>
+      </section>
       <section className="relative h-[70vh] min-h-[440px] flex-1 overflow-hidden bg-gray-950 lg:h-screen lg:min-h-0">
         {submitted && (
           <Viewer
