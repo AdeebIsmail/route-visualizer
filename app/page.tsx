@@ -325,10 +325,10 @@ export default function Home() {
             Your GPX route is loading!
           </p>
         )}
-        <section className="sticky bottom-0 mt-auto border-t border-gray-700 bg-gray-950 p-4">
+        <section className="sticky bottom-0 mt-6 border-t border-gray-700 bg-gray-950 p-4">
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/AdeebIsmail"
+              href="https://github.com/AdeebIsmail/route-visualizer"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="GitHub"
@@ -337,16 +337,6 @@ export default function Home() {
               <svg viewBox="0 0 24 24" className="h-5 w-5 fill-current">
                 <path d={siGithub.path} />
               </svg>
-            </a>
-
-            <a
-              href="https://adeebismail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Personal Website"
-              className="text-gray-400 hover:text-white transition-colors"
-            >
-              <Globe size={20} />
             </a>
           </div>
         </section>
